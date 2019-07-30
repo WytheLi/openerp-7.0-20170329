@@ -144,7 +144,7 @@ class amos_text_line(osv.osv):
     _description = 'amos.text.line'
 
     _columns = {
-        'product_id': fields.many2one('product.product', u'费用名称'),
+        'product_id': fields.many2one('product.product', u'费用名称', domain=[('sale_ok', '=', True)]),
         'date_order': fields.datetime(u'实到日期', select=True, copy=False),
         'price_unit': fields.float(u'培训费用',),
         'is_buy': fields.boolean(u'是否购买教程',),
