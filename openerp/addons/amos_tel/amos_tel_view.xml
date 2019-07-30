@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="view_amos_text_form_inherit" model="ir.ui.view">
+            <field name="name">amos.text.form.inherit</field>
+            <field name="model">amos.text</field>
+            <field name="inherit_id" ref="amos.view_form_amos_text" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_start']" position="replace" />
+                <xpath expr="//field[@name='date_end']" position="replace" />
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="tel" />
+                    <field name="date_start" required="0" />
+                    <field name="date_end" required="0" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
