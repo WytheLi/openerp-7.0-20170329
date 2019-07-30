@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 class amos_text(osv.osv):
     _name = 'amos.text'
     _description = 'amos.text'
+    _inherit = ['mail.thread', 'ir.needaction_mixin']
     _log_access = True      # 缺省值: True, 是否自动在对应的数据表中增加create_uid, create_date, write_uid, write_date四个字段
 
     def _amount(self, cr, uid, ids, fields_name, args, context=None):
@@ -57,7 +58,7 @@ class amos_text(osv.osv):
         state = 'review'
         message = '提交草稿，等待审核！'
         self.write(cr, uid, ids, {'state': state}, context=context)
-        # self.message_post(cr, uid, ids, body=_(message), context=context)
+        self.message_post(cr, uid, ids, body=_(message), context=context)
         return True
 
     def btn_cancel(self, cr, uid, ids, context=None):
@@ -83,10 +84,12 @@ class amos_text(osv.osv):
 
         self.write(cr, uid, ids, {'state': state}, context=context)
         # 推送消息
-        # self.message_post(cr, uid, ids, body=_(message), context=context)
+        self.message_post(cr, uid, ids, body=_(message), context=context)
+        print ids
+        o = self.browse(cr, uid, ids[0], context)
 
-        # if hasattr(self, 'message_subscribe'):
-        #     self.message_subscribe(cr, uid, ids, [4], context=context)
+        if hasattr(self, 'message_subscribe'):
+            self.message_subscribe(cr, uid, ids, [o.user_id.partner_id.id], context=context)
         return True
 
     # 定义工作流事件处理函数

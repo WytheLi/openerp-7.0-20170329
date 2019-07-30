@@ -11,7 +11,7 @@
 	'sequence': 0,
     'author': 'li',
     'website': 'http://www.openerp.com',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'data': [
         'amos_text_view.xml',
         'amos_text_workflow.xml',

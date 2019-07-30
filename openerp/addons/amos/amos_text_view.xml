@@ -13,21 +13,21 @@
 
                     <!--  states属性指定什么状态下按钮可见  -->
                     <!--  type不指定值，默认值为workflow  -->
-                    <!--<header>
+                    <header>
                         <button name="btn_review" string="提交审核" states="draft" type="object" class="oe_highlight" />
                         <button name="btn_done" string="审核" states="review" type="object" class="oe_highlight" />
                         <button name="btn_cancel" string="取消" states="done" type="object" class="oe_highlight" />
                         <button name="btn_draft" string="重置为草稿" states="cancel,review" type="object" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,review,done,close" />
-                    </header>-->
+                    </header>
 
-                    <header>
+                    <!--<header>
                         <button name="draft_to_review" string="提交审核" states="draft" class="oe_highlight" />
                         <button name="review_to_done" string="审核" states="review" class="oe_highlight" />
                         <button name="review_to_cancel" string="取消" states="done" class="oe_highlight" />
                         <button name="done_to_draft" string="重置为草稿" states="cancel,review" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,review,done,close" />
-                    </header>
+                    </header>-->
 
                     <sheet>
                         <group>
@@ -76,6 +76,12 @@
                             </page>
                         </notebook>
                     </sheet>
+
+                    <!--  邮件窗体  -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" help="" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
                 </form>
             </field>
         </record>
@@ -86,6 +92,7 @@
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="tree" >     <!--  create="false"  -->
+                    <field name="message_unread" invisible="1"/>    <!--  mail_thread模块中定义了该字段  -->
                     <field name="name" />
                     <field name="user_id" />
                     <field name="street" />
@@ -134,6 +141,24 @@
             </field>
         </record>
 
+        <!--  搜索视图  -->
+        <record id="view_amos_text_filter" model="ir.ui.view">
+            <field name="name">amos.text.list.select</field>
+            <field name="model">amos.text</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]" />
+                    <field name="user_id" />
+                    <separator/>
+                    <filter string="新消息" name="message_unread" domain="[('message_unread', '=', True)]" />
+                    <group expand="0" string="Group By">
+                        <filter string="主持人" domain="[]" context="{'group_by': 'user_id'}"/>
+                        <filter string="月分组" domain="[]" context="{'group_by': 'date_start'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record id="action_amos_text" model="ir.actions.act_window">
             <field name="name">action.amos.text</field>
             <field name="type">ir.actions.act_window</field>
@@ -141,6 +166,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">form,tree,calendar,gantt,graph</field>
             <field name="view_id" ref="view_tree_amos_text" />
+            <field name="search_view_id" ref="view_amos_text_filter" />
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     模块说明

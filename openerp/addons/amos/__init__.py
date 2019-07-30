@@ -1,2 +1,1 @@
 import amos
-import wizard
