@@ -60,7 +60,7 @@ class amos_text(osv.osv):
             obj = self.pool.get('res.users').browse(cr, uid, user_id, context=context)
             print obj, "obj"
             res['email'] = obj.email
-            return {'value': res}
+        return {'value': res}
 
     # 定义按钮事件处理函数
     def btn_review(self, cr, uid, ids, context=None):
@@ -144,6 +144,7 @@ class amos_text_line(osv.osv):
     _description = 'amos.text.line'
 
     _columns = {
+        'product_id': fields.many2one('product.product', u'费用名称'),
         'date_order': fields.datetime(u'实到日期', select=True, copy=False),
         'price_unit': fields.float(u'培训费用',),
         'is_buy': fields.boolean(u'是否购买教程',),
@@ -152,6 +153,13 @@ class amos_text_line(osv.osv):
                                  ('2', u'电话营销')],
                                 u'会员来源',),
     }
+
+    def onchange_product_id(self, cr, uid, ids, product_id, context=None):
+        res = {}
+        if product_id:
+            obj = self.pool.get('product.product').browse(cr, uid, product_id, context=context)
+            res['price_unit'] = obj.list_price
+        return {'value': res}
 
 
 class amos_tag(osv.osv):

@@ -61,6 +61,7 @@
 
                                     <tree editable="bottom">
                                         <field name="date_order" />
+                                        <field name="product_id" on_change="onchange_product_id(product_id)"/>
                                         <field name="price_unit" />
                                         <field name="is_buy" />
                                         <field name="ref" />
