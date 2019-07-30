@@ -31,6 +31,7 @@ class amos_text(osv.osv):
 
     _columns = {
         'name': fields.char(u'编号', states=states_draft, readonly=True),
+        'email': fields.char(u'邮箱'),
         'user_id': fields.many2one('res.users', u'主持人', states=states_draft, readonly=True),
         'duration': fields.float(u'时长', states=states_draft, readonly=True),
         'date_start': fields.datetime(u'开始日期', select=True, copy=False, states=states_draft, readonly=True),
@@ -52,6 +53,14 @@ class amos_text(osv.osv):
     _defaults = {
         'state': lambda *a: 'draft',
     }
+
+    def onchange_user_id(self, cr, uid, ids, user_id, context=None):
+        res = {}
+        if user_id:
+            obj = self.pool.get('res.users').browse(cr, uid, user_id, context=context)
+            print obj, "obj"
+            res['email'] = obj.email
+            return {'value': res}
 
     # 定义按钮事件处理函数
     def btn_review(self, cr, uid, ids, context=None):

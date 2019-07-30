@@ -37,7 +37,8 @@
                                 <field name="date_end" />
                             </group>
                             <group>
-                                <field name="user_id" />
+                                <field name="user_id" on_change="onchange_user_id(user_id)"/>
+                                <field name="email" />
                                 <field name="street" />
                                 <field name="number" />
                                 <field name="tag_ids" widget="many2many_tags"/>
