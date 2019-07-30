@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <!--  定义工作流基本信息  -->
+        <record id="workflow_amos_text" model="workflow">
+            <field name="name">amos.text.send</field>
+            <field name="osv">amos.text.send</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <!--  草稿  -->
+        <record id="workflow_amos_text_draft" model="workflow.activity">
+            <field name="wkf_id" ref="workflow_amos_text" />
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+            <field name="action">amos_draft()</field>
+            <field name="kind">function</field>
+        </record>
+
+        <!--  done  -->
+        <record id="workflow_amos_text_done" model="workflow.activity">
+            <field name="wkf_id" ref="workflow_amos_text" />
+            <field name="name">done</field>
+            <field name="action">amos_done()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>
+
+        <!--  审核  -->
+        <record id="workflow_amos_text_review" model="workflow.activity">
+            <field name="wkf_id" ref="workflow_amos_text" />
+            <field name="name">review</field>
+            <field name="action">amos_review()</field>
+            <field name="kind">function</field>
+        </record>
+
+        <!--  取消  -->
+        <record id="workflow_amos_text_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="workflow_amos_text" />
+            <field name="name">cancel</field>
+            <field name="flow_stop">True</field>
+            <field name="action">amos_cancel()</field>
+            <field name="kind">function</field>
+        </record>
+
+        <!--  事件跳转  从草稿到完成 from review to done  -->
+        <record id="from_review_to_done" model="workflow.transition">
+            <field name="act_from" ref="workflow_amos_text_review" />
+            <field name="act_to" ref="workflow_amos_text_done" />
+            <field name="signal">review_to_done</field>
+        </record>
+
+        <!--  从草稿到取消 from draft to cancel  -->
+        <record id="from_draft_to_cancel" model="workflow.transition">
+            <field name="act_from" ref="workflow_amos_text_draft" />
+            <field name="act_to" ref="workflow_amos_text_cancel" />
+            <field name="signal">draft_to_cancel</field>
+        </record>
+
+        <!--  从完成到取消 from done to cancel  -->
+        <record id="from_done_to_cancel" model="workflow.transition">
+            <field name="act_from" ref="workflow_amos_text_done" />
+            <field name="act_to" ref="workflow_amos_text_cancel" />
+            <field name="signal">done_to_cancel</field>
+        </record>
+
+        <!--  从取消到草稿 from cancel to draft  -->
+        <record id="from_cancel_to_draft" model="workflow.transition">
+            <field name="act_from" ref="workflow_amos_text_cancel" />
+            <field name="act_to" ref="workflow_amos_text_draft" />
+            <field name="signal">cancel_to_draft</field>
+        </record>
+
+        <!--  从草稿到审核 from draft to review  -->
+        <record id="from_draft_to_review" model="workflow.transition">
+            <field name="act_from" ref="workflow_amos_text_draft" />
+            <field name="act_to" ref="workflow_amos_text_review" />
+            <field name="signal">draft_to_review</field>
+        </record>
+
+        <!--  从审核到取消 from review to cancel  -->
+        <record id="from_review_to_cancel" model="workflow.transition">
+            <field name="act_from" ref="workflow_amos_text_review" />
+            <field name="act_to" ref="workflow_amos_text_cancel" />
+            <field name="signal">review_to_cancel</field>
+            <field name="condition">True</field>
+        </record>
+    </data>
+</openerp>

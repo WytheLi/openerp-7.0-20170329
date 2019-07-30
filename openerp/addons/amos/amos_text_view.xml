@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="view_form_amos_text" model="ir.ui.view">
+            <field name="name">amos.text.form</field>
+            <field name="model">amos.text</field>
+            <field name="arch" type="xml">
+                <form string="窗体名称" version="7.0">    <!--  create="false" copy="false" write="false" unlink="false"  -->
+                    <!--  状态栏  -->
+                    <!--<header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,review,done,close"></field>
+                    </header>-->
+
+                    <!--  states属性指定什么状态下按钮可见  -->
+                    <!--  type不指定值，默认值为workflow  -->
+                    <!--<header>
+                        <button name="btn_review" string="提交审核" states="draft" type="object" class="oe_highlight" />
+                        <button name="btn_done" string="审核" states="review" type="object" class="oe_highlight" />
+                        <button name="btn_cancel" string="取消" states="done" type="object" class="oe_highlight" />
+                        <button name="btn_draft" string="重置为草稿" states="cancel,review" type="object" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,review,done,close" />
+                    </header>-->
+
+                    <header>
+                        <button name="draft_to_review" string="提交审核" states="draft" class="oe_highlight" />
+                        <button name="review_to_done" string="审核" states="review" class="oe_highlight" />
+                        <button name="review_to_cancel" string="取消" states="done" class="oe_highlight" />
+                        <button name="done_to_draft" string="重置为草稿" states="cancel,review" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,review,done,close" />
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="date_start" />
+                                <field name="date_end" />
+                            </group>
+                            <group>
+                                <field name="user_id" />
+                                <field name="street" />
+                                <field name="number" />
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="页卡">
+                                <field name="order_line">
+                                    <form>
+                                        <group>
+                                            <field name="price_unit" />
+                                            <field name="date_order" />
+                                        </group>
+                                        <group>
+                                            <field name="is_buy" />
+                                            <field name="ref" />
+                                        </group>
+                                    </form>
+
+                                    <tree editable="bottom">
+                                        <field name="date_order" />
+                                        <field name="price_unit" />
+                                        <field name="is_buy" />
+                                        <field name="ref" />
+                                    </tree>
+                                </field>
+
+                                <!--  合计  -->
+                                <group class="oe_subtotal_footer oe_right" colspan="2">
+                                    <field name="price_subtotal" />
+                                </group>
+                                <div class="oe_clear" />
+
+                                <field name="note" placeholder="备注..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tree_amos_text" model="ir.ui.view">
+            <field name="name">amos.text.tree</field>
+            <field name="model">amos.text</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree" >     <!--  create="false"  -->
+                    <field name="name" />
+                    <field name="user_id" />
+                    <field name="street" />
+                    <field name="number" />
+                    <field name="date_start" />
+                    <field name="date_end" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <!--  日历视图  -->
+        <record id="view_calendar_amos_text" model="ir.ui.view">
+            <field name="name">amos.text.calendar</field>
+            <field name="model">amos.text</field>
+            <field eval="2" name="priority" />
+            <field name="arch" type="xml">
+                <calendar string="培训日历" date_start="date_start" color="user_id" date_delay="duration">
+                    <field name="user_id" />
+                    <field name="number" />
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_gantt_amos_text" model="ir.ui.view">
+            <field name="name">amos.text.gantt</field>
+            <field name="model">amos.text</field>
+            <field eval="2" name="priority" />
+            <field name="arch" type="xml">
+                <gantt string="培训" date_start="date_start" date_delay="duration">
+                </gantt>
+            </field>
+        </record>
+
+        <!--  图表视图  -->
+        <record id="view_graph_amos_text" model="ir.ui.view">
+            <field name="name">amos.text.graph</field>
+            <field name="model">amos.text</field>
+            <field name="arch" type="xml">
+                <graph string="培训员-课程总费用统计图" type="bar">
+                    <!--  X轴方向  -->
+                    <field name="user_id" />
+                    <!--  Y轴方向  -->
+                    <field name="price_subtotal" operator="+" />
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_amos_text" model="ir.actions.act_window">
+            <field name="name">action.amos.text</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">amos.text</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree,calendar,gantt,graph</field>
+            <field name="view_id" ref="view_tree_amos_text" />
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    模块说明
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="培训" id="menu_one_amos_text" sequence="1" />
+        <menuitem name="培训" id="menu_two_amos_text" parent="menu_one_amos_text" sequence="1" />
+        <menuitem name="培训" id="menu_three_amos_text" parent="menu_two_amos_text" action="action_amos_text" sequence="1"></menuitem>
+
+    </data>
+</openerp>
