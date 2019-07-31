@@ -55,6 +55,8 @@
             <field name="view_mode">form,tree</field>
             <field name="view_id" ref="view_tree_amos_all" />
             <field name="search_view_id" ref="view_amos_text_filter" />
+            <!--  上下文中给字段设置默认值  -->
+            <!--<field name="context">{'search_default_user_id': '15866668888'}</field>-->
             <!--  在上下文中添加默认搜索值  -->
             <field name="context">{"search_default_my_filter": uid}</field>
             <field name="help" type="html">
