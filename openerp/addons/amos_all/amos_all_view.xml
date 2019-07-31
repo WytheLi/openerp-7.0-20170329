@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="view_form_amos_all" model="ir.ui.view">
+            <field name="name">amos.all.form</field>
+            <field name="model">amos.all</field>
+            <field name="arch" type="xml">
+                <form string="窗体名称" version="7.0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,review,done,close"></field>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="mobile" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_tree_amos_all" model="ir.ui.view">
+            <field name="name">amos.all.tree</field>
+            <field name="model">amos.all</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_amos_all" model="ir.actions.act_window">
+            <field name="name">action.amos.all</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">amos.all</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="view_tree_amos_all" />
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    模块说明
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="全继承" id="menu_three_amos_all" parent="amos.menu_two_amos_text" action="action_amos_all" sequence="1" />
+
+    </data>
+</openerp>
