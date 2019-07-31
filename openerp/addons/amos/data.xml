@@ -10,5 +10,8 @@
             <field name="name">002(默认值)</field>
             <field name="user_id">3</field>
         </record>
+
+        <!--  函数方式初始化记录  -->
+        <function name="install_amos_text" model="amos.text" eval="([], {'lang': 'zh_TW'})" />
     </data>
 </openerp>

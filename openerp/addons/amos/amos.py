@@ -138,6 +138,11 @@ class amos_text(osv.osv):
         #     self.message_subscribe(cr, uid, ids, [4], context=context)
         return True
 
+    def install_amos_text(self, cr, uid, ids, context=None):
+        print context, 'amos.text --> install_amos_text()'
+        # 可以实现如sql写入的业务代码
+        return True
+
 
 class amos_text_line(osv.osv):
     _name = 'amos.text.line'
