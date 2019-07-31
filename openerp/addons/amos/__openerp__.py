@@ -15,6 +15,7 @@
     'data': [
         'amos_text_view.xml',
         'amos_text_workflow.xml',
+        'data.xml',
     ],
     'qweb': [
         # xx.xml

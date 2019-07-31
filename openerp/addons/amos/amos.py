@@ -67,7 +67,7 @@ class amos_text(osv.osv):
         state = 'review'
         message = '提交草稿，等待审核！'
         self.write(cr, uid, ids, {'state': state}, context=context)
-        self.message_post(cr, uid, ids, body=_(message), context=context)
+        # self.message_post(cr, uid, ids, body=_(message), context=context)
         return True
 
     def btn_cancel(self, cr, uid, ids, context=None):
@@ -93,7 +93,7 @@ class amos_text(osv.osv):
 
         self.write(cr, uid, ids, {'state': state}, context=context)
         # 推送消息
-        self.message_post(cr, uid, ids, body=_(message), context=context)
+        # self.message_post(cr, uid, ids, body=_(message), context=context)
         print ids
         o = self.browse(cr, uid, ids[0], context)
 

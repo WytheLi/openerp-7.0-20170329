@@ -31,6 +31,22 @@
                 </tree>
             </field>
         </record>
+        <record id="view_amos_text_filter" model="ir.ui.view">
+            <field name="name">amos.text.list.select</field>
+            <field name="model">amos.text</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]" />
+                    <filter string="我的单据" domain="[('user_id', '=', uid)]" name="my_filter" />
+                    <separator />
+                    <filter string="新消息" name="message_unread" domain="[('message_unread', '=', True)]" />
+                    <group expand="0" string="Group By">
+                        <filter string="主持人" domain="[]" context="{'group_by': 'user_id'}" />
+
+                    </group>
+                </search>
+            </field>
+        </record>
         <record id="action_amos_all" model="ir.actions.act_window">
             <field name="name">action.amos.all</field>
             <field name="type">ir.actions.act_window</field>
@@ -38,6 +54,9 @@
             <field name="view_type">form</field>
             <field name="view_mode">form,tree</field>
             <field name="view_id" ref="view_tree_amos_all" />
+            <field name="search_view_id" ref="view_amos_text_filter" />
+            <!--  在上下文中添加默认搜索值  -->
+            <field name="context">{"search_default_my_filter": uid}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     模块说明
