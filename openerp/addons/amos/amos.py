@@ -50,9 +50,86 @@ class amos_text(osv.osv):
         'tag_ids': fields.many2many('amos.tag', 'amos_text_amos_tag_rel', 'text_id', 'tag_id', u'分类', states=states_draft, readonly=True),
     }
 
+    def _get_sequence(self, cr, uid, ids, context=None):
+        """初始化序列值"""
+        new_id = self.pool.get('ir.sequence').get(cr, uid, 'amos.text')
+        return new_id
+
     _defaults = {
         'state': lambda *a: 'draft',
+        # 'name': '/',
+        'name': _get_sequence,
     }
+
+    def create(self, cr, uid, vals, context=None):
+        """
+        点击保存按钮，会触发该方法。
+        此处点击保存按钮，自动生成默认值
+        :param cr:
+        :param uid:
+        :param vals: 保存着model的字段
+        :param context:
+        :return: 新的记录id
+        """
+
+        if context is context:
+            context = {}
+        if vals.get('name', '/') == '/':
+            # 从连接池中获取序列对象，
+            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'amos.text') or '/'
+            ctx = dict(context or {}, mail_create_nolog=True)
+            new_id = super(amos_text, self).create(cr, uid, vals, context=ctx)
+            return new_id
+        else:
+            return super(amos_text, self).create(cr, uid, vals, context=context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        """
+        编辑保存时触发此方法。
+        这里编辑保存获取修改的字段值，以及获取原始表单未修改的字段
+        :param cr:
+        :param uid:
+        :param ids:
+        :param vals: 接受的是view中被改动字段的值
+        :param context:
+        :return:
+        """
+        # vals中获取改动的字段
+        print vals, "amos_text --> write()"
+        # 获取未改动的值
+        obj = self.browse(cr, uid, ids[0])  # 获取当前操作表单对象
+        print obj, '更改对象'
+        print obj.user_id.name, obj.date_start, obj.date_start
+        res = super(amos_text, self).write(cr, uid, ids, vals, context=context)
+        return res
+
+    def unlink(self, cr, uid, ids, context=None):
+        """判断表单状态，当为草稿时删除执行删除方法删除记录"""
+        obj = self.browse(cr, uid, ids, context)    # 获取当前操作表单对象 值为列表型
+        if obj[0].state != 'draft':
+            raise osv.except_osv(u'提醒', u'只能删除草稿')
+        return super(amos_text, self).unlink(cr, uid, ids, context=context)
+    
+    def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
+        """
+        查看对象时触发
+        :param cr:
+        :param uid:
+        :param ids:
+        :param fields: 对象的字段列表
+        :param context: 上下文数据
+        :param load:
+        :return:
+        """
+        res = super(amos_text, self).read(cr, uid, ids, fields=fields, context=context, load=load)
+        return res
+
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        obj = self.browse(cr, uid, id, context=context)
+        default["name"] = "%s(副本)" % obj.name
+        return super(amos_text, self).copy(cr, uid, id, default=default, context=context)
 
     def onchange_user_id(self, cr, uid, ids, user_id, context=None):
         res = {}
@@ -90,7 +167,6 @@ class amos_text(osv.osv):
 
     def btn_action(self, cr, uid, ids, state, message, context={}):
         """按键触发事件"""
-
         self.write(cr, uid, ids, {'state': state}, context=context)
         # 推送消息
         # self.message_post(cr, uid, ids, body=_(message), context=context)
@@ -129,7 +205,6 @@ class amos_text(osv.osv):
 
     def wkf_action(self, cr, uid, ids, state, message, context={}):
         """按键触发事件"""
-
         self.write(cr, uid, ids, {'state': state}, context=context)
         # 推送消息
         # self.message_post(cr, uid, ids, body=_(message), context=context)
