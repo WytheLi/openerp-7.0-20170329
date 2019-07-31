@@ -50,6 +50,30 @@ class amos_text(osv.osv):
         'tag_ids': fields.many2many('amos.tag', 'amos_text_amos_tag_rel', 'text_id', 'tag_id', u'分类', states=states_draft, readonly=True),
     }
 
+    _sql_constraints = [    # 字段约束
+        ('name_uniq', 'unique(name)', u'编号必须唯一！'),
+    ]
+
+    # def _check_date(self, cr, uid, ids, context=None):
+    #     """验证结束日大于起始日，且不为空"""
+    #     training_obj = self.browse(cr, uid, ids[0], context=context)
+    #     print training_obj.date_start, training_obj.date_end, '开始日期 -- 结束日期'
+    #     if training_obj.date_start and training_obj.date_end and training_obj.date_end < training_obj.date_start:
+    #         return True
+    #     return False
+
+    def _check_date(self, cr, uid, ids, context=None):
+        """验证结束日大于起始日，且不为空"""
+        traning_obj = self.read(cr, uid, ids, ['date_start', 'date_end'], context=context)
+        print traning_obj, '读取的对象'
+        if traning_obj[0]['date_start'] and traning_obj[0]['date_end'] and traning_obj[0]['date_end'] > traning_obj[0]['date_start']:
+            return True
+        return False
+
+    _constraints = [    # 验证必须在对象新建，修改保存的时候才能触发
+        (_check_date, u'结束日期必须大于起始日期且不为空！', ['date_start', 'date_end']),
+    ]
+
     def _get_sequence(self, cr, uid, ids, context=None):
         """初始化序列值"""
         new_id = self.pool.get('ir.sequence').get(cr, uid, 'amos.text')
@@ -60,6 +84,8 @@ class amos_text(osv.osv):
         # 'name': '/',
         'name': _get_sequence,
     }
+
+    _order = 'date_start asc, name asc'
 
     def create(self, cr, uid, vals, context=None):
         """
