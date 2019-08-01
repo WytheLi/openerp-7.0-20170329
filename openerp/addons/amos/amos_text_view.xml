@@ -182,5 +182,8 @@
         <menuitem name="培训" id="menu_two_amos_text" parent="menu_one_amos_text" sequence="1" />
         <menuitem name="培训" id="menu_three_amos_text" parent="menu_two_amos_text" action="action_amos_text" sequence="1"></menuitem>
 
+        <!--  菜单的继承(重写菜单)  -->
+        <!--<menuitem name="培训aaa" id="amos.menu_three_amos_text" />-->
+
     </data>
 </openerp>
