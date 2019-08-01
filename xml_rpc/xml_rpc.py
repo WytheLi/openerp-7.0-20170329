@@ -38,7 +38,7 @@ print ids
 # print ids
 
 # search_read   未跑通
-domain = [('name', '=', '666')]
-fields = ['name', 'user_id']
-res = sock.execute(dbname, uid, pwd, 'amos.text', 'search_read', domain, fields)
-print res
+# domain = [('name', '=', '666')]
+# fields = ['name', 'user_id']
+# res = sock.execute(dbname, uid, pwd, 'amos.text', 'search_read', domain, fields)
+# print res
