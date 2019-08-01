@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_amos_text">
+            <field name="name">会议</field>
+            <field name="sequence">1</field>
+        </record>
+        <record model="res.groups" id="group_amos_text_user">
+            <field name="name">用户</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="amos.module_amos_text" />
+        </record>
+        <record model="res.groups" id="group_amos_text_manager">
+            <field name="name">经理</field>
+            <field name="category_id" ref="amos.module_amos_text" />
+            <field name="implied_ids" eval="[(4, ref('group_amos_text_user'))]" />
+            <field name="users" eval="[(4, ref('base.user_root'))]" />
+        </record>
+    </data>
+    <!--<data noupdate="1">
+        <record model="ir.rule" id="amos_qr_code_order_comp_rule">
+            <field name="name">管理多家公司的二维码订单</field>
+            <field name="model_id" ref="model_amos_qr_code_order" />
+            <field name="global" eval="True" />
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'child_of', )]</field>
+        </record>
+        <record model="ir.rule" id="amos_qr_code_order_line_comp_rule">
+            <field name="name">管理多家公司的二维码明细</field>
+            <field name="model_id" ref="model_amos_qr_code" />
+            <field name="global" eval="True" />
+            <field name="domain_force">[('|', ('company_id', '=', False), ('company_id', 'child_of'), [)]</field>
+        </record>
+    </data>-->
+</openerp>

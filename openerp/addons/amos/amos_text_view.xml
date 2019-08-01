@@ -14,7 +14,7 @@
                     <!--  states属性指定什么状态下按钮可见  -->
                     <!--  type不指定值，默认值为workflow  -->
                     <header>
-                        <button name="btn_review" string="提交审核" states="draft" type="object" class="oe_highlight" />
+                        <button name="btn_review" string="提交审核" states="draft" type="object" groups="amos.group_amos_text_user" class="oe_highlight" />
                         <button name="btn_done" string="审核" states="review" type="object" class="oe_highlight" />
                         <button name="btn_cancel" string="取消" states="done" type="object" class="oe_highlight" />
                         <button name="btn_draft" string="重置为草稿" states="cancel,review" type="object" class="oe_highlight" />

@@ -2,14 +2,14 @@
 <openerp>
     <data>
         <!--  初始化两条记录  -->
-        <record model="amos.text" id="amos_text_001">
+        <!--<record model="amos.text" id="amos_text_001">
             <field name="name">001(默认值)</field>
             <field name="user_id">1</field>
         </record>
         <record model="amos.text" id="amos_text_002">
             <field name="name">002(默认值)</field>
             <field name="user_id">3</field>
-        </record>
+        </record>-->
 
         <!--  函数方式初始化记录  -->
         <function name="install_amos_text" model="amos.text" eval="([], {'lang': 'zh_TW'})" />

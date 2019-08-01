@@ -17,6 +17,8 @@
         'amos_text_workflow.xml',
         'data.xml',
         'amos_sequence.xml',
+        'amos_groups.xml',
+        'security/ir.model.access.csv',
     ],
     'qweb': [
         # xx.xml
