@@ -1,0 +1,312 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* amos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20170329\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-01 07:38+0000\n"
+"PO-Revision-Date: 2019-08-01 07:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: amos
+#: model:ir.model,name:amos.model_amos_tag
+msgid "amos.tag"
+msgstr ""
+
+#. module: amos
+#: constraint:amos.text:0
+msgid "结束日期必须大于起始日期且不为空！"
+msgstr ""
+
+#. module: amos
+#: field:amos.text.line,product_id:0
+msgid "费用名称"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,price_subtotal:0
+msgid "合计"
+msgstr ""
+
+#. module: amos
+#: model:ir.module.category,name:amos.module_amos_text
+msgid "会议"
+msgstr ""
+
+#. module: amos
+#: selection:amos.text,state:0
+msgid "已完成"
+msgstr ""
+
+#. module: amos
+#: field:amos.text.line,is_buy:0
+msgid "是否购买教程"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: amos
+#: selection:amos.text,state:0
+msgid "草稿"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,number:0
+msgid "应参加人数"
+msgstr ""
+
+#. module: amos
+#: model:res.groups,name:amos.group_amos_text_manager
+msgid "经理"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,order_line:0
+msgid "明细"
+msgstr ""
+
+#. module: amos
+#: model:ir.actions.act_window,name:amos.action_amos_text
+msgid "action.amos.text"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,tag_ids:0
+msgid "分类"
+msgstr ""
+
+#. module: amos
+#: selection:amos.text,state:0
+msgid "发送邮件"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "月分组"
+msgstr ""
+
+#. module: amos
+#: model:res.groups,name:amos.group_amos_text_user
+msgid "用户"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "培训员-课程总费用统计图"
+msgstr ""
+
+#. module: amos
+#: selection:amos.text.line,ref:0
+msgid "电话营销"
+msgstr ""
+
+#. module: amos
+#: help:amos.text,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "Group By"
+msgstr ""
+
+#. module: amos
+#: field:amos.text.line,date_order:0
+msgid "实到日期"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,date_end:0
+msgid "结束日期"
+msgstr ""
+
+#. module: amos
+#: selection:amos.text.line,ref:0
+msgid "网络"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,state:0
+msgid "状态"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "窗体名称"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "培训日历"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "备注..."
+msgstr ""
+
+#. module: amos
+#: field:amos.text,duration:0
+msgid "时长"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "Search"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "提交审核"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,note:0
+msgid "培训内容"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: amos
+#: field:amos.text.line,price_unit:0
+msgid "培训费用"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,street:0
+msgid "培训地址"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+#: field:amos.text,user_id:0
+msgid "主持人"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,email:0
+msgid "邮箱"
+msgstr ""
+
+#. module: amos
+#: help:amos.text,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "审核"
+msgstr ""
+
+#. module: amos
+#: sql_constraint:amos.text:0
+msgid "编号必须唯一！"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+#: selection:amos.text,state:0
+msgid "取消"
+msgstr ""
+
+#. module: amos
+#: field:amos.text,date_start:0
+msgid "开始日期"
+msgstr ""
+
+#. module: amos
+#: field:amos.text.line,ref:0
+msgid "会员来源"
+msgstr ""
+
+#. module: amos
+#: field:amos.tag,name:0
+#: field:amos.text,name:0
+msgid "编号"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "tree"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+#: field:amos.text.line,amos_text_id:0
+#: model:ir.ui.menu,name:amos.menu_one_amos_text
+#: model:ir.ui.menu,name:amos.menu_three_amos_text
+#: model:ir.ui.menu,name:amos.menu_two_amos_text
+msgid "培训"
+msgstr "Training"
+
+#. module: amos
+#: model:ir.model,name:amos.model_amos_text_line
+msgid "amos.text.line"
+msgstr ""
+
+#. module: amos
+#: help:amos.text,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "页卡"
+msgstr ""
+
+#. module: amos
+#: selection:amos.text,state:0
+msgid "等待审核"
+msgstr ""
+
+#. module: amos
+#: model:ir.model,name:amos.model_amos_text
+msgid "amos.text"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "新消息"
+msgstr ""
+
+#. module: amos
+#: view:amos.text:0
+msgid "重置为草稿"
+msgstr ""
+
+#. module: amos
+#: model:ir.actions.act_window,help:amos.action_amos_text
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                    模块说明\n"
+"                </p>\n"
+"            "
+msgstr ""
+
